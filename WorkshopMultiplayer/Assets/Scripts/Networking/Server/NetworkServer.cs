@@ -31,6 +31,8 @@ public class NetworkServer : IDisposable
         //Debug.Log(userData.userName);
 
         response.Approved = true;
+        response.Position = SpawnPoint.GetRandomSpawnPos();
+        response.Rotation = Quaternion.identity;
         response.CreatePlayerObject = true;
     }
 
@@ -46,6 +48,19 @@ public class NetworkServer : IDisposable
             clientIdToAuth.Remove(clientId);
             authIdToUserData.Remove(authId);
        }
+    }
+
+    public UserData GetUserDataByClientId(ulong clientId)
+    {
+        if (clientIdToAuth.TryGetValue(clientId,out string authId))
+        {
+            if (authIdToUserData.TryGetValue(authId,out UserData data))
+            {
+                return data;
+            }
+            return null;
+        }
+        return null;
     }
 
     public void Dispose()
