@@ -20,13 +20,13 @@ public class ColorSelector : MonoBehaviour
 
     public const string PlayerColorKey = "PlayerColorIndex";
 
-    // private void OnValidate()
-    // {
-    //     foreach (var selection in selectionButton)
-    //     {
-    //         selection.colorButton.color = selection.color;
-    //     }
-    // }
+    private void OnValidate()
+    {
+        foreach (var selection in selectionButton)
+        {
+            selection.colorButton.color = selection.color;
+        }
+    }
 
     private void Start()
     {
